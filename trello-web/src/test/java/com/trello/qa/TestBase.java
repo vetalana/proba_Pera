@@ -18,14 +18,19 @@ public class TestBase {
         driver.manage().window().maximize();
 
         openSite("https://trello.com");
-        login("", "");
+        login("elena.telran@yahoo.com", "12345.com");
     }
 
     public void login(String email, String password) {
-        type(By.name(""), email);
-        type(By.name(""), password);
-        click(By.id());
+        click(By.cssSelector("[href='/login']"));
+        type(By.cssSelector("[type=email]"), email);
+        type(By.cssSelector("[type=password]"), password);
+        click(By.id("login"));
 
+    }
+
+    public void click(By locator) {
+        driver.findElement(locator).click();
     }
 
     public void type(By locator, String text) {
@@ -41,6 +46,7 @@ public class TestBase {
 
     @AfterClass
     public void tearDown(){
+        driver.quit();
 
     }
 }
